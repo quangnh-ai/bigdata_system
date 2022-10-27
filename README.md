@@ -28,3 +28,6 @@ docker-compose up
 | :-------------------: | :------------------------------: |
 | Jupyterlab            | http://localhost:8888            |
 | Spark App UI          | http://localhost:4040            |
+| Spark Master UI       | http://localhost:9090            |
+| Spark Worker 1 UI     | http://localhost:9091            |
+| Spark Worker 2 UI     | http://localhost:9092            |
