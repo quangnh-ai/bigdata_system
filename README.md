@@ -24,3 +24,7 @@ docker build -t jupyterlab:python-3.10.6-jdk-11.10.16
 ```bash
 docker-compose up
 ```
+| Service               | URL                              |
+| :-------------------: | :------------------------------: |
+| Jupyterlab            | http://localhost:8888            |
+| Spark App UI          | http://localhost:4040            |
