@@ -49,6 +49,7 @@ services:
     volumes:
       - ./workspace:/opt/shared_storage
       - ./database:/opt/database
+      
     networks:
       - bigdatanet
   
@@ -59,6 +60,7 @@ services:
       - 4040:4040
     volumes:
       - ./workspace:/opt/jupyterlab
+      - ./jupyterlab/config:/root/.jupyter
     networks:
       - bigdatanet
     
