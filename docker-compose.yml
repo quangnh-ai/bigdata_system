@@ -7,8 +7,8 @@ services:
       - 9090:8080
       - 7077:7077
     volumes:
-      - ./apps:/opt/spark-apps
-      - ./data:/opt/spark-data
+      - ./workspace:/opt/shared_storage
+      - ./database:/opt/database
     environment:
       - SPARK_LOCAL_IP=spark-master
       - SPARK_MODE=master
@@ -30,8 +30,8 @@ services:
       - SPARK_MODE=worker
       - SPARK_LOCAL_IP=spark-worker-1
     volumes:
-      - ./apps:/opt/spark-apps
-      - ./data:/opt/spark-data
+      - ./workspace:/opt/shared_storage
+      - ./database:/opt/database
     networks:
       - bigdatanet
   
@@ -47,8 +47,8 @@ services:
       - SPARK_MODE=worker
       - SPARK_LOCAL_IP=spark-worker-2
     volumes:
-      - ./apps:/opt/spark-apps
-      - ./data:/opt/spark-data
+      - ./workspace:/opt/shared_storage
+      - ./database:/opt/database
     networks:
       - bigdatanet
   
@@ -58,10 +58,31 @@ services:
       - 8888:8888
       - 4040:4040
     volumes:
-      - ./data:/opt/jupyterlab/data
-      - ./apps:/opt/jupyterlab/apps
+      - ./workspace:/opt/jupyterlab
+    networks:
+      - bigdatanet
+    
+  postgres:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
     networks:
       - bigdatanet
 
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    ports:
+      - 5051:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    networks:
+      - bigdatanet
+  
 networks:
   bigdatanet:
