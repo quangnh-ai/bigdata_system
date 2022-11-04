@@ -166,5 +166,5 @@ cython_debug/
 
 *.jupyterlab-workspace
 
-database/*
-!database/.gitkeep
+workspace/database/*
+!workspace/database/.gitkeep

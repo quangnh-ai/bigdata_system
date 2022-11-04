@@ -8,7 +8,6 @@ services:
       - 7077:7077
     volumes:
       - ./workspace:/opt/shared_storage
-      - ./database:/opt/database
     environment:
       - SPARK_LOCAL_IP=spark-master
       - SPARK_MODE=master
@@ -31,7 +30,6 @@ services:
       - SPARK_LOCAL_IP=spark-worker-1
     volumes:
       - ./workspace:/opt/shared_storage
-      - ./database:/opt/database
     networks:
       - bigdatanet
   
@@ -48,8 +46,6 @@ services:
       - SPARK_LOCAL_IP=spark-worker-2
     volumes:
       - ./workspace:/opt/shared_storage
-      - ./database:/opt/database
-      
     networks:
       - bigdatanet
   
