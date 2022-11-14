@@ -1,4 +1,4 @@
-*.env
+# *.env
 mybb/
 mariadb/
 postgres/
@@ -168,3 +168,4 @@ cython_debug/
 
 workspace/database/*
 !workspace/database/.gitkeep
+test
