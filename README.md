@@ -32,3 +32,4 @@ docker-compose up
 | Spark Worker 1 UI     | http://localhost:9091            |             |                |
 | Spark Worker 2 UI     | http://localhost:9092            |             |                |
 | pgadmin               | http://localhost:5051            | admin       | admin@admin.com|
+| superset              | http://localhost:8088            | admin       | admin          |

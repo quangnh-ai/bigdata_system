@@ -95,68 +95,6 @@ services:
       - 6379:6379
     restart: unless-stopped
 
-  superset:
-    image: apache/superset:latest-dev
-    container_name: superset
-    command: ["/app/docker/docker-bootstrap.sh", "app-gunicorn"]
-    restart: unless-stopped
-    ports:
-      - 8088:8088
-    env_file: superset.env
-    depends_on:
-      - postgres
-      - redis
-    volumes:
-      - ./superset/docker:/app/docker
-      - superset_home:/app/superset_home
-
-  superset-init:
-    image: apache/superset:latest-dev
-    container_name: superset-init
-    command: ["/app/docker/docker-init.sh"]
-    env_file: superset.env
-    depends_on:
-      - postgres
-      - redis
-    user: "root"
-    volumes:
-      - ./superset/docker:/app/docker
-      - superset_home:/app/superset_home
-    healthcheck:
-      disable: true
-
-  superset-worker:
-    image: apache/superset:latest-dev
-    container_name: superset-worker
-    command: ["/app/docker/docker-bootstrap.sh", "worker"]
-    restart: unless-stopped
-    env_file: superset.env
-    depends_on:
-      - postgres
-      - redis
-    user: "root"
-    volumes:
-      - ./superset/docker:/app/docker
-      - superset_home:/app/superset_home
-    healthcheck:
-      test: ["CMD-SHELL", "celery inspect ping -A superset.tasks.celery_app:app -d celery@$$HOSTNAME"]
-
-  superset-worker-beat:
-    image: apache/superset:latest-dev
-    container_name: superset-worker-beat
-    command: ["/app/docker/docker-bootstrap.sh", "beat"]
-    env_file: superset.env
-    restart: unless-stopped
-    depends_on:
-      - postgres
-      - redis
-    user: "root"
-    volumes:
-      - ./superset/docker:/app/docker
-      - superset_home:/app/superset_home
-    healthcheck:
-      disable: true
-
 volumes:
   superset_home:
     external: false
@@ -164,6 +102,6 @@ volumes:
     external: false
   redis:
     external: false
-
+    
 networks:
   bigdatanet:
