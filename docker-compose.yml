@@ -10,7 +10,7 @@ services:
     volumes:
       - ./workspace/note:/opt/shared_storage
     environment:
-      - SPARK_LOCAL_IP=spark-master
+      # - SPARK_LOCAL_IP=spark-master
       - SPARK_MODE=master
     networks:
       - bigdatanet
@@ -29,7 +29,7 @@ services:
       - SPARK_WORKER_CORES=1
       - SPARK_WORKER_MEMORY=1G
       - SPARK_MODE=worker
-      - SPARK_LOCAL_IP=spark-worker-1
+      # - SPARK_LOCAL_IP=spark-worker-1
     volumes:
       - ./workspace:/opt/shared_storage
     networks:
@@ -46,7 +46,7 @@ services:
       - SPARK_WORKER_CORES=1
       - SPARK_WORKER_MEMORY=1G
       - SPARK_MODE=worker
-      - SPARK_LOCAL_IP=spark-worker-2
+      # - SPARK_LOCAL_IP=spark-worker-2
     volumes:
       - ./workspace:/opt/shared_storage
     networks:
