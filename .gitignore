@@ -170,3 +170,7 @@ workspace/database/*
 !workspace/database/.gitkeep
 test
 cassandra/data
+airflow/data/*
+!airflow/data/.gitkeep
+airflow/logs/*
+!airflow/logs/.gitkeep

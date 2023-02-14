@@ -1,10 +1,6 @@
-import redis 
+import random
+import string
 
-redis_service = redis.Redis(
-    host='localhost',
-    port=6379,
-    password=''
-)
-
-redis_service.set('456', 'quangnh')
-print(redis_service.get('456'))
+characters = string.ascii_letters + string.digits
+password = ''.join(random.choice(characters) for i in range(32))
+print(password)
