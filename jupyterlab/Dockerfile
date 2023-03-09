@@ -13,13 +13,14 @@ RUN apt-get -y autoclean && \
 
 RUN pip install --upgrade setuptools \
                           wheel
-RUN pip install --no-cache-dir numpy \
-                               jupyterlab \
-                               pandas \
-                               opencv-python \
-                               matplotlib \
-                               pyspark \
-                               findspark
+
+ENV PYSPARK_PYTHON=/usr/bin/python
+                          
+WORKDIR /opt/jupyterlab
+RUN cd /opt/jupyterlab
+COPY requirements.txt .
+RUN pip install -r requirements.txt --no-cache-dir 
+RUN rm -rf /opt/jupyterlab/requirements.txt
 
 # RUN wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.4/hadoop-3.3.4.tar.gz && \
 #     wget https://downloads.apache.org/hadoop/common/hadoop-3.3.4/hadoop-3.3.4.tar.gz.sha512 && \
@@ -29,6 +30,5 @@ RUN pip install --no-cache-dir numpy \
 #     echo "export JAVA_HOME = $JAVA_HOME" >> /usr/local/hadoop/etc/hadoop/hadoop-env.sh
 
 
-WORKDIR /opt/jupyterlab
 
 CMD ["jupyter", "lab", "--ip=0.0.0.0", "--allow-root"]

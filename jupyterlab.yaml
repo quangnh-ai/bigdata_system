@@ -1,10 +1,17 @@
 version: '3'
 services:
   jupyter-lab:
-    image: jupyterlab:python-3.10.6-jdk-11.10.16
+    image: jupyterlab:python-3.10.6-jdk.11.10.16
     container_name: jupyter-lab
     ports:
       - 8888:8888
+      - 4040-4045:4040-4045
     volumes:
       - ./workspace/jupyterlab:/opt/jupyterlab
       - ./jupyterlab/config:/root/.jupyter
+    networks:
+      - big-data
+    
+networks:
+  big-data:
+    external: true

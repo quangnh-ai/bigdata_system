@@ -1,43 +1,20 @@
 version: '3'
 
 services:
-  airflow:
-    build: 
-      context: .
-      dockerfile: Dockerfile
+  airflow_master:
+    image: airflow:python-3.10.6-jdk-11.10.16
     ports:
       - 8080:8080
     volumes:
       - ./dags:/airflow/dags
       - ./plugins:/airflow/plugins
       - ./logs:/airflow/logs
-      - ./airflow.cfg:/airflow/airflow.cfg
-    depends_on:
-      - postgresql
-    # restart: always
+      - ./config/airflow_master.cfg:/airflow/airflow.cfg
+    env_file:
+      - environments/airflow_master.env
     healthcheck:
       test: ["CMD-SHELL", "[ -f /airflow/airflow-webserver.pid ]"]
       interval: 1m30s
       timeout: 30s
       retries: 5
       start_period: 30s
-
-  postgresql:
-    image: postgres:latest
-    container_name: postgresql
-    ports:
-      - 5432:5432
-    environment:
-      - POSTGRES_USER=airflow
-      - POSTGRES_PASSWORD=airflow
-      - POSTGRES_DB=airflow
-      - PGDATA=/var/lib/postgresql/data/pgdata
-    volumes:
-      - ./data:/var/lib/postgresql/data/pgdata
-
-  redis:
-    image: redis:latest
-    container_name: redis
-    ports:
-      - 6379:6379
-    restart: unless-stopped

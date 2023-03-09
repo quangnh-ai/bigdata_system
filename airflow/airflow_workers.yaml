@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  airflow_worker_1:
+    image: airflow:python-3.10.6-jdk-11.10.16
+    ports:
+      - 8081:8080
+    volumes:
+      - ./config/airflow_worker.cfg:/airflow/airflow.cfg
+    # env_file:
+    #   - environments/airflow_worker.env
+    environment:
+      - AIRFLOW_MODE=worker
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /airflow/airflow-webserver.pid ]"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+
+  airflow_worker_2:
+    image: airflow:python-3.10.6-jdk-11.10.16
+    ports:
+      - 8082:8080
+    volumes:
+      - ./config/airflow_worker.cfg:/airflow/airflow.cfg
+    # env_file:
+    #   - environments/airflow_worker.env
+    environment:
+      - AIRFLOW_MODE=worker
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /airflow/airflow-webserver.pid ]"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+
+  airflow_flower:
+    image: airflow:python-3.10.6-jdk-11.10.16
+    ports:
+      - 5555:5555
+    volumes:
+      - ./config/airflow_flower.cfg:/airflow/airflow.cfg
+    env_file:
+      - environments/airflow_flower.env
+    healthcheck:
+      test: ["CMD-SHELL", "[ -f /airflow/airflow-webserver.pid ]"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
