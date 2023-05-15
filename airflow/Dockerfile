@@ -2,7 +2,7 @@ ARG AIRFLOW_VERSION=2.5.1
 ARG PYTHON_VERSION=3.10
 ARG CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
 
-FROM python_jdk:python-3.10.6-jdk-11.10.16
+FROM python-jdk:python-3.13.3-jdk-11.10.16
 
 RUN apt-get update && apt-get upgrade -y
 RUN pip install --upgrade pip

@@ -23,6 +23,16 @@ services:
     networks:
       - big-data
 
+  # pgadmin:
+  #   container_name: pgadmin_container
+  #   image: dpage/pgadmin4
+  #   environment:
+
+  #   ports:
+  #     - 5050:80
+  #   networks:
+  #     - big-data
+
 networks:
   big-data:
     external: true

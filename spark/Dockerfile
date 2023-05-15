@@ -1,7 +1,7 @@
 ARG SPARK_VERSION=3.3.1
 ARG HADOOP_VERSION=3
 
-FROM python_jdk:python-3.10.6-jdk-11.10.16
+FROM python-jdk:python-3.11.3-jdk-11.10.16
 
 ENV SPARK_HOME=/opt/spark
 ENV SPARK_MASTER_PORT=7077
